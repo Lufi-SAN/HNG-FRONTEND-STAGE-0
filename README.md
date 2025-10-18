@@ -4,7 +4,7 @@ HNG Frontend Stage 0 Project - A Profile Card
 A simple responsive Profile Card built using vanilla HTML, CSS and JS
 
 ## Live Demo
-[View on Github Pages](https://hng-frontend-stage-0.netlify.app/)
+[Hosted on Netlify](https://hng-frontend-stage-0.netlify.app/)
 
 ## Project Structure
 ```
