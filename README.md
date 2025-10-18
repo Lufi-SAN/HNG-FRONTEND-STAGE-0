@@ -7,11 +7,12 @@ A simple responsive Profile Card built using vanilla HTML, CSS and JS
 [View on Github Pages] *** githubpagesurl ***
 
 ## Project Structure
-HNG-FRONTEND-STAGE-0/
+```HNG-FRONTEND-STAGE-0/
 ├── index.html
 ├── styles.css
 └── image/
     └── profile.jpg
+```
     
 ## Installation
 Clone this repository:

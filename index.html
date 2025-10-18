@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HNG-FE-STAGE-0</title>
+    
+    <link rel="preload" as="image" href="image/profile.jpg">
+    <link rel="dns-prefetch" href="//x.com">
+    <link rel="dns-prefetch" href="//www.linkedin.com">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        :root {
+            max-block-size: 100svh;
+        }
+
+        body {
+            max-block-size: 100%;
+            background-color: deepskyblue;
+        }
+
+        /* CSS Rules for the article */
+        [data-testid="test-profile-card"] {
+            display: flex;
+            border-block-start: 2px solid deepskyblue;
+            border-inline-end: 2px solid deepskyblue;
+            border-radius: 15px;
+            overflow: clip;
+            background-color: white;
+            margin: 10svh auto calc(100svh / 3) auto;
+            max-inline-size: calc(100svw/1.5);
+        }
+
+        /* Rules for container of all elements except the figure; Last child out of two of article + rule for time & bio */
+        #text-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            
+            [data-testid="test-user-bio"] {
+                color: lightgray;
+            }
+            [data-testid="test-user-time"] {
+                background-color: lightblue;
+                border-radius: 5px;
+                color: deepskyblue;
+                padding: 4px 1em 8px 0.5em;
+                box-shadow: 0 3px skyblue;
+            }    
+        }
+
+        /* Rule for header/h2; article descendant; Sibling of social links ul in subsection of text-info */
+        [data-testid="test-user-name"] {
+            word-spacing: -0.25em;
+        }
+
+        /* Rule for ul container of social links */
+        [data-testid="test-user-social-links"] {
+            height: min-content;
+        }
+
+        /* socila link siblings in a flex container */
+        [data-testid="test-user-social-X"],[data-testid="test-user-social-LinkedIn"] {
+            width: 2em;
+            height: min-content;    
+        }
+
+        /* rule for social link 1 */
+        [data-testid="test-user-social-X"] {
+            background-color: aquamarine
+        }
+
+        /* rule for social link 2 */
+        [data-testid="test-user-social-LinkedIn"] {
+            margin-inline-start: 2px;
+            background-color: deeppink;
+        }
+        
+        /* container of header & social links ul */
+        #primary-user-info {
+            display: flex;
+            [data-testid="test-user-name"] {
+                font-weight: 700;
+                font-family: cursive;
+            }
+            [data-testid="test-user-social-links"] {
+                display: flex;
+                list-style-type: none;
+            }
+        }
+
+        /* siblings of flexbox: #tetiary-user-info */
+        [data-testid="test-user-hobbies"], [data-testid="test-user-dislikes"] {
+            font-weight: 700;
+        }
+
+        /* Tertiary info; Parent of hobbies & dislikes */
+        #tetiary-user-info {
+            display: flex;
+            margin-block-end: 1em;
+        }
+
+        /* child1 of tetiary-user-info */
+        #tetiary-user-info > :first-child {
+            flex: 1 1 1px;
+            padding-block-end: 2em;
+            h3 {font-size: clamp(1rem ,7.5vw, 2rem);}
+            ul {list-style-type: none; padding-inline-start: 0;}
+        }
+
+        /* child2 of tetiary-user-info */
+        #tetiary-user-info > :nth-of-type(even) {
+            padding-inline-start: 1em;
+            padding-block-end: 2em;
+            background-color: lightblue;
+            color: beige;
+            flex: 1 1 1px;
+            h3 {font-size: clamp(1rem ,7.5vw, 2rem);}
+            ul {list-style-type: none; padding-inline-start: 0;}
+        }
+
+        /* Set margin-bottom */
+        [data-testid="test-user-bio"],[data-testid="test-user-time"],#primary-user-info {
+            margin-block-end: 0.25rem;
+        }
+
+        /* Laptop */
+        @media (min-width: 1252px) {
+            [data-testid="test-profile-card"] {
+                max-height: calc(50svh);
+                margin: 10svh auto calc(100svh/3) auto;
+                padding-inline-end: 12px;
+                box-shadow: -10px 10px;
+            }
+            
+            #text-info {
+                margin-inline-start: 8px;
+            }
+
+            figure {
+                max-height: 100%;
+                flex: 2 1 0;
+                overflow: clip;
+            }
+
+            [data-testid="test-user-social-links"] {
+                padding-inline-start: calc(1em/4);
+            }
+
+            [data-testid="test-user-avatar"] {
+                overflow: clip;   
+            }
+
+            [data-testid="test-user-avatar"] {
+                filter: grayscale(1);
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            [data-testid="test-user-avatar"]:hover {
+                filter: none;
+            }
+            
+            [data-testid="test-user-name"] {
+                font-size: 36px;
+            }
+
+            [data-testid="test-user-social-X"],[data-testid="test-user-social-LinkedIn"] {
+                margin-block-start: 11px;
+            }
+
+            [data-testid="test-user-bio"] {
+                max-inline-size: 50ch
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 1252px) {
+            [data-testid="test-profile-card"] {
+                flex-direction: column;
+                box-shadow: 0 5px;
+            }
+
+            #text-info {
+                padding-inline-start: 4px;
+                padding-inline-end: 4px;
+
+                [data-testid="test-user-time"] {
+                    text-align: center;
+                }                
+            }
+            
+            figure {
+                position: relative;
+                background-color: aqua;
+                padding-inline: auto;
+                display: flex;
+                justify-content: center;
+                margin-block-end: 32px;
+            }
+
+            [data-testid="test-user-social-links"] {
+                padding-inline-start: 0px;
+            }
+
+            [data-testid="test-user-avatar"] {
+                width: 4em;
+                aspect-ratio: 1;
+                object-fit: cover;
+                position: relative;
+                border: 4px solid white;
+                border-radius: 50%;
+                inset-block-start: 2em;
+            }
+
+            [data-testid="test-user-name"] {
+                font-size: clamp(1rem ,7.5vw, 2rem);
+            }
+
+            [data-testid="test-user-bio"] {
+                max-inline-size: 40em;
+                text-align: center;
+            }
+
+            #primary-user-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #tetiary-user-info > :first-child {
+                h3 {font-size: clamp(1rem ,7.5vw, 2rem);}
+            }
+
+            #tetiary-user-info > :nth-of-type(even) {    
+                h3 {font-size: clamp(1rem ,7.5vw, 2rem);} 
+        }
+        }
+
+        #tetiary-user-info > * ul > * {
+            margin-inline-start: 0;
+        }
+    </style>
+</head>
+<body>
+    <article aria-label="Profile card for Daniel Elufisan" data-testid="test-profile-card">
+        <figure>
+            <img src="image/profile.jpg" alt="My profile picture" data-testid="test-user-avatar">
+        </figure>
+        
+        <div id="text-info">
+
+            <div id="primary-user-info">
+                <header data-testid="test-user-name" aria-label="User name">Daniel Elufisan</header>
+                <ul data-testid="test-user-social-links">
+                    <li data-testid="test-user-social-X">
+                        <a href="https://x.com/AKanteWannabe?t=TNcJhM3NjVOb9Fion3Supg&s=09" aria-label="Visit Daniel Elufisan on X (Twitter)" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                <path d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 
+                                244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    
+                    <li data-testid="test-user-social-LinkedIn">
+                        <a href="https://www.linkedin.com/in/daniel-elufisan-61666a235?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
+                        aria-label="Visit Daniel Elufisan on X (Twitter)" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                <path d="M512 96L127.9 96C110.3 96 96 110.5 96 128.3L96 511.7C96 529.5 110.3 544 127.9 544L512 544C529.6 544 544 529.5 544 511.7L544 
+                                128.3C544 110.5 529.6 96 512 96zM231.4 480L165 480L165 266.2L231.5 266.2L231.5 480L231.4 480zM198.2 160C219.5 160 236.7 177.2 236.7 
+                                198.5C236.7 219.8 219.5 237 198.2 237C176.9 237 159.7 219.8 159.7 198.5C159.7 177.2 176.9 160 198.2 160zM480.3 480L413.9 480L413.9 
+                                376C413.9 351.2 413.4 319.3 379.4 319.3C344.8 319.3 339.5 346.3 339.5 374.2L339.5 480L273.1 480L273.1 266.2L336.8 266.2L336.8 
+                                295.4L337.7 295.4C346.6 278.6 368.3 260.9 400.6 260.9C467.8 260.9 480.3 305.2 480.3 362.8L480.3 480z"/>
+                            </svg>
+                        </a> 
+                    </li>
+                </ul>
+            </div>
+            
+            <p data-testid="test-user-bio" aria-label="User biography">
+                Aspiring to be a Fullstack Developer right now. Language of choice is Javascript. After that, wanna try embedded and administrator work.
+            </p>
+            <p data-testid="test-user-time" id="time"></p>
+
+            
+            <div id="tetiary-user-info">
+            <section data-testid="test-user-hobbies" aria-label="List of hobbies">
+                <h3>
+                    Hobbies
+                </h3>         
+                <ul>
+                    <li>Manga</li>
+                    <li>Gym</li>
+                    <li>Ball</li>
+                </ul>
+            </section>
+
+            <section data-testid="test-user-dislikes" aria-label="List of dislikes">
+                <h3>
+                    Dislikes
+                </h3>
+                <ul>
+                    <li>NTR</li>
+                    <li>Enzo Fernandez</li>
+                    <li>Guava</li>
+                </ul>
+            </section>
+            </div>
+        </div>
+    </article>
+    
+    <script>
+        const time = document.getElementById("time")
+        const currentTime = Date.now()
+        time.innerText = currentTime   
+    </script>
+</body>
+</html>
