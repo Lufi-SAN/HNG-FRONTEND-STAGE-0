@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact-us Page</title>
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+         * { 
+  margin: 0;
+  font-weight: 400;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: var(--customFontSize, 18px)
+  
+}
+
+ @media (max-width: 1252px) {
+  * {
+    --customFontSize: 16px;
+  }
+ }
+
+
+
+ @media (max-width: 600px) {
+    form {
+        max-inline-size: calc(100svw/1.6);
+        padding: 24px;
+    }
+ }
+
+ @media (min-width: 600px) {
+    form {
+        max-inline-size: calc(100svw/2.5);
+        padding: 32px;
+    }    
+ }
+
+ :root {
+            max-block-size: 100svh;
+            overflow: hidden;
+        }
+
+        body {
+            max-block-size: 100%;
+            background-color: deepskyblue;
+        }
+
+        form {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            margin-block-start: 10svh;
+            margin-inline: auto;
+            border-radius: 8px;
+            position: relative;
+        }
+
+input, textarea {
+    z-index: 1;
+}
+
+        .inputWrapper {
+            display: inline-flex;
+            flex-direction: column;
+            p {
+                color: red;
+                line-height: 1;
+                padding-block: 4px;
+                margin-block-start: 4px;
+                background-color: lightpink;
+                border: 2px solid red;
+                border-radius: 4px;
+            }
+            p.valid{
+                transform: translateY(calc(-1 * (4px + 8px + 4px + 1em)));
+                transition: transform 0.3s ease-in-out;
+                opacity: 0;
+            }
+            p.invalid {
+                transition: transform 0.3s ease-in-out;
+                transform: translateY(0);
+            }
+            input {
+                min-block-size: 2em;
+            }
+        }
+
+        [data-testid="test-contact-submit"] {
+            margin-block-start: 8px;
+        }
+
+        [data-testid="test-contact-success"] { 
+            transform: translateY(100svh);
+            margin-inline: auto;
+            margin-block-start: 16px;
+            background-color: lightgreen;
+            padding: 8px 16px;
+            color: darkgreen;
+            transition: transform 0.3s ease-in-out;
+                        inline-size: fit-content;
+            cursor: pointer;
+        }
+
+        [data-testid="test-contact-success"].valid {
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+            inline-size: fit-content;
+        }
+
+        #navButton {
+            position: absolute;
+            top: 0px;
+            left: 100%;
+            margin-inline-start: 8px;
+            gap: 12px;
+            inline-size: fit-content;
+        }
+
+        /* #navButton > *:hover {
+            transform: translateY(-4px);
+            transition: transform 0.2s ease-in-out;
+        } */
+
+        #navButton > *:active {
+            box-shadow: none;
+            transform: translateY(4px);
+        }
+
+        #navButton > * {
+            background-color: white;
+            border: 1px solid gray;
+            border-radius: 10px;
+            box-shadow: -3px 4px;
+            a {
+                text-decoration: none;
+                color: initial;
+            }
+        }
+
+
+        
+    </style>
+</head>
+<body>
+    <form novalidate>
+        <div style="display: flex; flex-direction: column;" id="navButton">
+        <button id="goToProfileButton" type="button"><a href="./index.html">Profile</a></button>
+        <button id="goToAboutButton" type="button"><a href="./about-me.html">About</a></button>
+        </div>
+<!-- NAME -->
+        <label for="fullName">
+            Full name
+        </label>
+        <div class="inputWrapper">
+            <input type="text" name="fullName" id="fullName" data-testid="test-contact-name" required>
+            <p data-testid="test-contact-error-name" aria-describedby="fullName" class="valid"></p>
+        </div>
+        
+<!-- EMAIL -->
+        <label for="email">
+            Email
+        </label>
+        <div class="inputWrapper">
+            <input type="email" name="email" id="email" data-testid="test-contact-email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" required>
+            <p data-testid="test-contact-error-email" aria-describedby="email" class="valid"></p>
+        </div>
+        
+<!-- SUBJECT -->
+        <label for="subject">
+            Subject
+        </label>
+        <div class="inputWrapper">
+            <input type="text" name="subject" id="subject"  data-testid="test-contact-subject" required>
+            <p data-testid="test-contact-error-subject" aria-describedby="subject" class="valid"></p>
+        </div>
+<!-- MESSAGE -->
+        <label for="message">
+            Message
+        </label>
+        <div class="inputWrapper">
+            <textarea name="message" id="message" data-testid="test-contact-message" minlength="10" required></textarea>
+            <p data-testid="test-contact-error-message" aria-describedby="message" class="valid"></p>
+        </div>
+        
+<!-- SUBMIT BUTTON -->
+        <button type="submit" data-testid="test-contact-submit">Submit</button>
+    </form>
+    <p data-testid="test-contact-success">
+        Form successfully submitted! Click me to go again.
+    </p>
+</body>
+<script>
+    const form = document.querySelector('form');
+    const nameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('email');
+    const subjectInput = document.getElementById('subject');
+    const messageInput = document.getElementById('message');
+    const button = document.querySelector('button[type="submit"]');
+
+    const nameError = document.querySelector('[data-testid="test-contact-error-name"]');
+    const emailError = document.querySelector('[data-testid="test-contact-error-email"]');
+    const subjectError = document.querySelector('[data-testid="test-contact-error-subject"]');
+    const messageError = document.querySelector('[data-testid="test-contact-error-message"]');
+    
+    const successMessage = document.querySelector('[data-testid="test-contact-success"]');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const valid = false;
+        const nameValid = nameInput.checkValidity();
+        const emailValid = emailInput.checkValidity();
+        const subjectValid = subjectInput.checkValidity();
+        const messageValid = messageInput.checkValidity();
+        function checkValidity() {
+            if (nameInput.value === '') {
+                nameError.textContent = 'Name is required.';
+                nameError.classList.remove('valid');
+                nameError.classList.add('invalid');
+            } else {
+                nameError.textContent = '';
+                nameError.classList.add('valid');
+                nameError.classList.remove('invalid');
+            }
+
+            if (emailInput.value === '') {
+                emailError.textContent = 'Email is required.';
+                emailError.classList.remove('valid');
+                emailError.classList.add('invalid');
+            } else if (!emailValid) {
+                emailError.textContent = 'Please enter a valid email address.';
+                emailError.classList.remove('valid');
+                emailError.classList.add('invalid');
+            } else {
+                emailError.textContent = '';
+                emailError.classList.add('valid');
+                emailError.classList.remove('invalid');
+            }
+
+            if (subjectInput.value === '') {
+                subjectError.textContent = 'Subject is required.';
+                subjectError.classList.remove('valid');
+                subjectError.classList.add('invalid');
+            } else {
+                subjectError.textContent = '';
+                subjectError.classList.add('valid');
+                subjectError.classList.remove('invalid');
+            }
+
+            if (messageInput.value === '') {
+                messageError.textContent = 'Message is required.';
+                messageError.classList.remove('valid');
+                messageError.classList.add('invalid');
+            } else if (messageInput.value.length < 10) {
+                messageError.textContent = 'Message must be at least 10 characters long.';
+                messageError.classList.remove('valid');
+                messageError.classList.add('invalid');
+            } else {
+                messageError.textContent = '';
+                messageError.classList.add('valid');
+                messageError.classList.remove('invalid');
+            }
+            return nameValid && emailValid && subjectValid && messageValid;
+        }
+        const formGood = checkValidity();
+        if (formGood) {
+            successMessage.classList.add('valid');
+        }
+    });
+    successMessage.addEventListener('click', function() {
+        successMessage.classList.remove('valid');
+        form.reset();
+    });
+</script>
+</html>
