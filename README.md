@@ -25,3 +25,25 @@ Open Project Folder:
   cd HNG-FRONTEND-STAGE-0
 ```
 Open index.html in your browser
+
+# HNG-FTONTEND-STAGE-1 (AN EXTENSION OF THE STAGE 0 TASK)
+Creating a Multi-Page Application. 
+
+Two pages being a Contact Us page & an About page.
+
+Live Demo still on same URL above
+
+## Project Structure
+Structure has been altered 
+```
+HNG-FRONTEND-STAGE-0/
+├── index.html
+├── styles.css
+└── image/
+    └── profile.jpg
+├── about-me.html
+├── contact-us.html
+```
+
+## Installation
+Same as above
