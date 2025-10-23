@@ -33,9 +33,14 @@ main {
     display: flex;
     flex-direction: column;
     
-    max-inline-size: calc(100svw/3);
     gap: 1em
 
+}
+
+@media (min-width: 500px) {
+    main {
+        max-inline-size: calc(100svw/3);
+    }    
 }
 
 h2 {
